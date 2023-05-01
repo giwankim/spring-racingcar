@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import racingcar.domain.RacingCar;
+import racingcar.domain.racingcar.RacingCar;
 
 public class RacingCarConsoleApplication {
 

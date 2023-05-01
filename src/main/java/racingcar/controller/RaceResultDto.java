@@ -3,7 +3,7 @@ package racingcar.controller;
 import static java.util.stream.Collectors.joining;
 
 import java.util.List;
-import racingcar.domain.RacingCar;
+import racingcar.domain.racingcar.RacingCar;
 import racingcar.domain.RacingCarGame;
 
 public class RaceResultDto {

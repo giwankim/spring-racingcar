@@ -1,4 +1,4 @@
-package racingcar.domain;
+package racingcar.domain.racingcar;
 
 public class RacingCar {
 
@@ -16,6 +16,12 @@ public class RacingCar {
 
   public void move(int randomNumber) {
     if (randomNumber >= 4) {
+      this.position += 1;
+    }
+  }
+
+  public void move(MoveStrategy moveStrategy) {
+    if (moveStrategy.canMove()) {
       this.position += 1;
     }
   }

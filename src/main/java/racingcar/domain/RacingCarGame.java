@@ -1,32 +1,36 @@
 package racingcar.domain;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.OptionalInt;
-import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import racingcar.domain.racingcar.MoveStrategy;
+import racingcar.domain.racingcar.RacingCar;
 
 public class RacingCarGame {
 
-  private static final Random RANDOM = new Random();
   private final List<RacingCar> racingCars;
   private final int rounds;
 
-  public RacingCarGame(String names, int count) {
-    this.rounds = count;
-    this.racingCars = Arrays.stream(names.split(","))
-        .map(name -> new RacingCar(name.trim()))
-        .collect(Collectors.toUnmodifiableList());
+  public RacingCarGame(List<RacingCar> racingCars, int rounds) {
+    this.racingCars = racingCars;
+    this.rounds = rounds;
   }
 
-  public void play() {
-    IntStream.range(0, rounds).forEach(i -> playRound());
+  public static RacingCarGame of(List<String> driverNames, int rounds) {
+    List<RacingCar> racingCars = driverNames.stream()
+        .map(RacingCar::new)
+        .collect(Collectors.toList());
+    return new RacingCarGame(racingCars, rounds);
   }
 
-  private void playRound() {
-    racingCars.forEach(racingCar -> racingCar.move(RANDOM.nextInt(10)));
+  public void play(MoveStrategy moveStrategy) {
+    IntStream.range(0, rounds).forEach(i -> playRound(moveStrategy));
+  }
+
+  private void playRound(MoveStrategy moveStrategy) {
+    racingCars.forEach(racingCar -> racingCar.move(moveStrategy));
   }
 
   public List<RacingCar> getWinners() {
